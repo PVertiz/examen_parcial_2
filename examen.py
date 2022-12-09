@@ -194,8 +194,10 @@ def calcular_kmeans(k,imagen,iteraciones):
         
     #print(lineas)
     imagen_copia=imagen1
-    print("distancias: ")
+    
     for i in range(numero_figuras):
+        print("valor coordenadas longitud "+str(i+1)+" :"+str(lineas[i][0])+" ," +str(lineas[i][1]))
+        print("distancia: ")
         print(distancia_euclidiana(lineas[i][0],lineas[i][1]))
         imagen_copia = cv2.line(imagen_copia, lineas[i][0], lineas[i][1],(249, 251, 26), 3)
 
