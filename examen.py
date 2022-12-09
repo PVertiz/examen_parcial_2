@@ -34,7 +34,7 @@ print(RGB_img)
 
 def inicializar_centroides(k):
     centroides=[]
-    
+    #creamos centroides aleatorios
     for i in range(k):
         coordenadas=[]
         for j in range(3):
@@ -43,6 +43,7 @@ def inicializar_centroides(k):
 
     return centroides
 
+#recivimos 2 puntos y regresamos la distancia entre ellos
 def distancia_euclidiana(punto1,punto2):
     suma_aux = 0 #suma auxiliar
     for i in range(len(punto1)): 
@@ -51,6 +52,7 @@ def distancia_euclidiana(punto1,punto2):
     #regresamos la raiz cuadrada
     return math.sqrt(suma_aux)
 
+#actualizamos centroides
 def actualizar_centroides(centroides,agrupaciones):
     nuevos_centroides=[]
     for i in range(len(centroides)):
@@ -65,6 +67,7 @@ def actualizar_centroides(centroides,agrupaciones):
         #print(agrupaciones[i])    
         #print(len(agrupaciones[i]))
         divisor=len(agrupaciones[i])
+        #en caso de que el divisor sea igual a cero
         if (divisor==0):
             divisor=1
         x_aux=x_aux/divisor
@@ -89,6 +92,7 @@ def clasificar(centroides,pixel):
             index = i
     return index
 
+#separamos la imagen de acuerdo a los centroides
 def segmentar_imagen(imagen,k,centroides):
     imagen_segmentada=np.zeros([filas, columnas, 3], dtype=np.uint8)
     for w in range(k): 
@@ -98,7 +102,7 @@ def segmentar_imagen(imagen,k,centroides):
                 if(imagen[i][j]==w):
                     imagen_segmentada[i][j]=valor_aux
     return imagen_segmentada
-
+#separamos la imagen en blanco y negro con solo los jitomates
 def crear_imagen_con_objetos(imagen,centroide):
     imagen_segmentada=np.zeros([filas, columnas, 1], dtype=np.uint8)
     
@@ -110,6 +114,7 @@ def crear_imagen_con_objetos(imagen,centroide):
                 imagen_segmentada[i][j]=[0]
     return imagen_segmentada
 
+#obtenemos los puntos mas alejados de los bordes
 def obtener_diametro(bordes):
     distancia_minima=-100
     extremos=[]
@@ -168,6 +173,7 @@ def calcular_kmeans(k,imagen,iteraciones):
         if(centroides_temp==centroides):
             break
     agrupador_objetos=0
+    #verificar que centroide es el que tiene los circulos
     for i in range(len(centroides)):
             if(abs(centroides[i][0]-centroides[i][1])>50 and abs(centroides[i][0]-centroides[i][2])>50):
                 agrupador_objetos=i
