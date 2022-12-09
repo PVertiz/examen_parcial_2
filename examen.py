@@ -199,8 +199,10 @@ def calcular_kmeans(k,imagen,iteraciones):
         print(distancia_euclidiana(lineas[i][0],lineas[i][1]))
         imagen_copia = cv2.line(imagen_copia, lineas[i][0], lineas[i][1],(249, 251, 26), 3)
 
+    cv2.imshow("imagen original",imagen1)
+    cv2.imshow("imagen filtrada",imagen)
+    cv2.imshow("imagen segmentada",imagen_segmentada)
     cv2.drawContours(imagen_con_bordes, contours, -1, (0,255,0), 3)    
-    #cv2.imshow("imagen segmentada",imagen_segmentada)
     cv2.imshow("imagen con objetos",imagen_objetos)
     cv2.imshow("imagen con bordes",imagen_con_bordes)
     cv2.imshow("imagen con trazos",imagen_copia)
